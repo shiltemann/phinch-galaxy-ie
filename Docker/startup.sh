@@ -6,6 +6,7 @@ cp /proxy.conf /etc/nginx/sites-enabled/default;
 # Serve the Phinch website
 cd /home/Phinch && python -mSimpleHTTPServer &
 
+# update filename to load in Phinch in readFile.js (if you use same name every time, chrome will use previously stored db)
 cd /home/Phinch/data
 newname=`ls dataset*.biom`
 sed -i  "s/'REPLACE_ME'/'${newname}'/g"  /home/Phinch/scripts/readFile.js 

@@ -9,10 +9,6 @@ ie_request.load_deploy_config()
 # Define a volume that will be mounted into the container.
 # This is a useful way to provide access to large files in the container,
 # if the user knows ahead of time that they will need it.
-
-#hda_basename = hda.file_name.substring(hda.file_name.lastIndexOf('/')+1)+'.biom'
-#user_file = ie_request.volume(hda.file_name, '/home/Phinch/data/'+hda_basename, how='ro')
-#user_file = ie_request.volume(hda.file_name, '/home/Phinch/data/galaxy_dataset.biom', how='ro')
 user_file = ie_request.volume(hda.file_name, '/home/Phinch/data/'+os.path.basename(hda.file_name)+'.biom', how='ro')
 
 # Launch the IE. This builds and runs the docker command in the background.

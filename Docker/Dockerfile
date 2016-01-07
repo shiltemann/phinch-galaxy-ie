@@ -30,22 +30,11 @@ RUN git clone https://github.com/PitchInteractiveInc/Phinch.git /home/Phinch && 
 # set Phinch to load imported history file by default
 ADD ./index.html /home/Phinch/index.html
 ADD ./readFile.js /home/Phinch/scripts/readFile.js
-RUN chmod a+w /home/Phinch/scripts/readFile.js
-#ADD ./init.js /home/Phinch/scripts/init.js
-
-#RUN rm /home/Phinch/data/testdata.biom
 
 ADD ./startup.sh /startup.sh
 ADD ./monitor_traffic.sh /monitor_traffic.sh
 
-RUN chmod +x /startup.sh /monitor_traffic.sh
-
-RUN mkdir /import
-
 COPY ./proxy.conf /proxy.conf
-
-VOLUME ["/import"]
-WORKDIR /import/
 
 EXPOSE 80
 CMD /startup.sh
