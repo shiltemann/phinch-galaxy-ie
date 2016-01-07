@@ -15,7 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ### Install Phinch dependencies
 RUN apt-get -qq update && \
     apt-get install --no-install-recommends -y \
-    ca-certificates nginx nodejs npm git && \
+    ca-certificates nginx nodejs npm git php5 php5-cli php-pear imagemagick && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install -g coffee-script
 
