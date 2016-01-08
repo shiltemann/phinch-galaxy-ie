@@ -30,6 +30,7 @@ RUN git clone https://github.com/PitchInteractiveInc/Phinch.git /home/Phinch && 
 # set Phinch to load imported history file by default
 ADD ./index.html /home/Phinch/index.html
 ADD ./readFile.js /home/Phinch/scripts/readFile.js
+ADD ./export.php /home/Phinch/server/export.php
 
 ADD ./startup.sh /startup.sh
 ADD ./monitor_traffic.sh /monitor_traffic.sh
