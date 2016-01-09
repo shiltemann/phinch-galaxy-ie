@@ -28,11 +28,14 @@ RUN git clone https://github.com/PitchInteractiveInc/Phinch.git /home/Phinch && 
     sed -i '382s/_k/k/' /home/Phinch/src/filter.coffee && \
     coffee -o /home/Phinch/scripts/ -c /home/Phinch/src/ 
 
-# set Phinch to load imported history file by default
+### Add custom modifications to Phinch (autoload dataset, export to history, disable share)
 ADD ./index.html /home/Phinch/index.html
+ADD ./viz.html /home/Phinch/viz.html
 ADD ./readFile.js /home/Phinch/scripts/readFile.js
+ADD ./taxonomyViz.js /home/Phinch/scripts/taxonomyViz.js
 ADD ./export.php /home/Phinch/server/export.php
 ADD ./galaxy.py /usr/bin/galaxy.py
+
 
 ADD ./startup.sh /startup.sh
 ADD ./monitor_traffic.sh /monitor_traffic.sh

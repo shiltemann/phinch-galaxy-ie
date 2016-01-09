@@ -84,13 +84,13 @@
 					<!-- Real Input field, hidden-->
 					<input type="file" id="files" name="myFile" onchange="$('#txtFakeText').val($('#files').val().replace('C:\\fakepath\\', '') ); " style="display: none" />
 					<input type="text" id="txtFakeText" name="txtFakeText" readonly="true" value="Drop file here or browse">
-					<input type="button" id = "fakeBrowse" class="file_btn" onclick="$('#files').click(); " value="BROWSE">
+					<input type="button" id = "fakeBrowse" class="file_btn,disabled" onclick="$('#files').click(); " value="BROWSE" disabled>
 				</div>
 
 				<div id = "fileDrag" >Drop file here or browse</div>
 				<div id="progress_bar"><div class="percent"></div></div>
-				<button id="parse" class="file_btn">LOAD FILE</button>
-				<button id="loadTestFile">loading galaxy dataset, please wait..</button>
+				<button id="parse" class="file_btn">LOADING YOUR GALAXY DATASET, PLEASE WAIT..</button>
+				<button id="loadTestFile">loading...</button>
 			</div>
 		</section>
 
