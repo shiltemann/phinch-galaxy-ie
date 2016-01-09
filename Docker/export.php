@@ -25,6 +25,16 @@ $fh_svg = fopen("tmp.svg", 'w') or die("can't open file");
 fwrite($fh_svg,$svg);
 fclose($fh_svg);
 
+//SH: create png file instead of pipe for export to galaxy history
+$process = proc_open('convert tmp.svg phinch_exported_image.png', $pipeDescriptions, $pipes, NULL, $_ENV);
+$return_value = proc_close($process);
+
+//SH: send to galaxy
+$process = proc_open('python /usr/bin/galaxy.py --action put --argument phinch_exported_image.png', $pipeDescriptions, $pipes, NULL);
+$return_value = proc_close($process);
+
+//SH: also do the regular preview and download option:
+
 //$process = proc_open('convert svg: png:-', $pipeDescriptions, $pipes, NULL, $_ENV);
 $process = proc_open('convert tmp.svg png:-', $pipeDescriptions, $pipes, NULL, $_ENV);
 //$process = proc_open('convert -version', $pipeDescriptions, $pipes, NULL, $_ENV);
@@ -34,7 +44,7 @@ if (is_resource($process)) {
     // 1 => readable handle connected to child stdout
     // 2 => readable handle connected to child stderr
     
-    //SH: use file instead of pipe
+    //SH: use the file instead of pipe
     //fwrite($pipes[0], $svg);
     //fclose($pipes[0]);
 

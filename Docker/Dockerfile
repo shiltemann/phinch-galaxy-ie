@@ -15,7 +15,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ### Install Phinch dependencies
 RUN apt-get -qq update && \
     apt-get install --no-install-recommends -y \
-    ca-certificates nginx nodejs npm git php5 php5-cli php-pear imagemagick librsvg2-bin && \
+    ca-certificates nginx nodejs npm git php5 php5-cli php-pear imagemagick librsvg2-bin python-pip && \
+    pip install bioblend && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install -g coffee-script
 
@@ -31,6 +32,7 @@ RUN git clone https://github.com/PitchInteractiveInc/Phinch.git /home/Phinch && 
 ADD ./index.html /home/Phinch/index.html
 ADD ./readFile.js /home/Phinch/scripts/readFile.js
 ADD ./export.php /home/Phinch/server/export.php
+ADD ./galaxy.py /usr/bin/galaxy.py
 
 ADD ./startup.sh /startup.sh
 ADD ./monitor_traffic.sh /monitor_traffic.sh
