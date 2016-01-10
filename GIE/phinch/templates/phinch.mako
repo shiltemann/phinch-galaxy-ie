@@ -36,7 +36,7 @@ requirejs(['interactive_environments', 'plugin/phinch'], function(){
     load_notebook(url);
 });
 </script>
-<div id="main" width="100%" height="100%">
+<div id="main" style="width: 100%; height: 5000px;>
 </div>
 </body>
 </html>
