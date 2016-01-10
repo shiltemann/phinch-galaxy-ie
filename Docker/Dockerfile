@@ -39,6 +39,7 @@ ADD ./galaxy.py /usr/bin/galaxy.py
 
 # allow export of filtered biom file to history
 ADD ./filter.js /home/Phinch/scripts/filter.js
+ADD ./preview.html /home/Phinch/preview.html
 ADD ./export2.php /home/Phinch/server/export2.php
 ADD ./nginx.conf /etc/nginx/nginx.conf
 RUN sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 100M/' /etc/php5/cli/php.ini && \

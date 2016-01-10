@@ -752,6 +752,14 @@
     };
 
     filter.prototype.downloadPhinch = function(param) {
+      $('#exportShareDiv, #exportLoading').fadeIn(100);
+      $('#downloadPreview img').attr('src', '');
+      $('#downloadPreview a').attr('href', '');
+      $('#exportHeader').html('Exporting your biom file to Galaxy, please wait...');
+      $('#exportShareDiv .icon-remove').click(function(e) {
+        return $('#exportShareDiv').fadeOut(500);
+      });
+     
       var biomToStore, blob, d, flag, i, index, j, k, l, n, o, obj, p, phinch_data_matrix, q, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, sum_rows, t, tStr, tempCol, that, u, valid_rows_count, w, x;
       that = this;
       phinch.generated_by = 'Phinch 1.0';
@@ -777,19 +785,25 @@
           index++;
         }
       }
-      phinch.data = phinch_data_matrix;
-      for (i = p = 0, ref3 = biom.shape[1] - 1; 0 <= ref3 ? p <= ref3 : p >= ref3; i = 0 <= ref3 ? ++p : --p) {
-        for (j = q = 0, ref4 = no_data_attributes_array.length - 1; 0 <= ref4 ? q <= ref4 : q >= ref4; j = 0 <= ref4 ? ++q : --q) {
-          if (this.selected_no_data_attributes_array.indexOf(no_data_attributes_array[j]) === -1) {
-            this.removeFromObjectByKey(phinch.columns[i].metadata, no_data_attributes_array[j]);
+      try{
+        phinch.data = phinch_data_matrix;
+        for (i = p = 0, ref3 = biom.shape[1] - 1; 0 <= ref3 ? p <= ref3 : p >= ref3; i = 0 <= ref3 ? ++p : --p) {
+          for (j = q = 0, ref4 = no_data_attributes_array.length - 1; 0 <= ref4 ? q <= ref4 : q >= ref4; j = 0 <= ref4 ? ++q : --q) {
+            if (this.selected_no_data_attributes_array.indexOf(no_data_attributes_array[j]) === -1) {
+              this.removeFromObjectByKey(phinch.columns[i].metadata, no_data_attributes_array[j]);
+            }
           }
-        }
-        for (k = t = 0, ref5 = attributes_array.length - 1; 0 <= ref5 ? t <= ref5 : t >= ref5; k = 0 <= ref5 ? ++t : --t) {
-          if (this.selected_attributes_array.indexOf(attributes_array[k]) === -1) {
-            this.removeFromObjectByKey(phinch.columns[i].metadata, attributes_array[k]);
+          for (k = t = 0, ref5 = attributes_array.length - 1; 0 <= ref5 ? t <= ref5 : t >= ref5; k = 0 <= ref5 ? ++t : --t) {
+            if (this.selected_attributes_array.indexOf(attributes_array[k]) === -1) {
+              this.removeFromObjectByKey(phinch.columns[i].metadata, attributes_array[k]);
+            }
           }
+          phinch.columns[i].metadata['phinchID'] = phinchID_array[i];
         }
-        phinch.columns[i].metadata['phinchID'] = phinchID_array[i];
+      }
+      catch (e){
+        $('#exportHeader').html('Phinch Interactive Environment has been stopped due to inactivity, please restart.');
+        $('#exportLoading').fadeOut(500);
       }
       tempCol = new Array(this.selected_sample.length);
       for (i = u = 0, ref6 = this.selected_sample.length - 1; 0 <= ref6 ? u <= ref6 : u >= ref6; i = 0 <= ref6 ? ++u : --u) {
@@ -826,16 +840,24 @@
       return this.server.biom.add(biomToStore).done(function() {
         if (param === 0) {
           //return saveAs(blob, filename);
-	  //SH: save biom file to galaxy instead of downloading
-	  postData = {
+          //SH: save biom file to galaxy instead of downloading
+          postData = {
             fname: obj
           };
-	  backendServer = 'http://' + window.location.host + window.location.pathname.substr(0, window.location.pathname.lastIndexOf('/')) + "/server/";
-	  exportEndpoint = backendServer + 'export2.php';
-          return $.post(exportEndpoint, postData, function(){
-	    //TODO: nicer notification window
-	     alert("Biom file exported to Galaxy (you may need to refresh your history)") 
-	  });
+          backendServer = 'http://' + window.location.host + window.location.pathname.substr(0, window.location.pathname.lastIndexOf('/')) + "/server/";
+          exportEndpoint = backendServer + 'export2.php';
+          //do a GET of export2.php first to check if Phinch docker is still running, if so, do the POST
+          $.get(exportEndpoint, function(){
+            return $.post(exportEndpoint, postData, function(){
+              $('#exportHeader').html('Biom file has been successfully exported to Galaxy (you may need to refresh your history)');
+              $('#exportLoading').fadeOut(500);
+            })
+          })  
+          .fail(function() {
+            $('#exportHeader').html('Phinch Interactive Environment has been stopped due to inactivity, please restart.');
+            $('#exportLoading').fadeOut(500);
+          });    
+    
         } else if (param === 1) {
           return that.jumpToGallery();
         }
