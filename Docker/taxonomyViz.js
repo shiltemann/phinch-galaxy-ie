@@ -2164,7 +2164,10 @@
         svg: svgStringData
       };
       exportEndpoint = backendServer + 'export.php';
-      return $.post(exportEndpoint, postData, this.exportCallback);
+      return $.post(exportEndpoint, postData, this.exportCallback).fail(function() {
+        $('#exportHeader').html('Phinch Interactive Environment has been stopped due to inactivity, please restart.');
+	$('#exportLoading').fadeOut(500); 
+      });
     };
 
     taxonomyViz.prototype.doZip = function() {
