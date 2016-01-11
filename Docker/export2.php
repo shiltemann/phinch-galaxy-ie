@@ -19,12 +19,12 @@ if(get_magic_quotes_gpc()) {
 
 
 //save biom data to file
-$fh_biom = fopen("export.biom", 'w') or die("can't open file");
+$fh_biom = fopen("phinch_export.biom", 'w') or die("can't open file");
 fwrite($fh_biom,$biomdata);
 fclose($fh_biom);
 
 //SH: send to galaxy
-$process = proc_open('python /usr/bin/galaxy.py --action put --argument export.biom', $pipeDescriptions, $pipes, NULL);
+$process = proc_open('python /usr/bin/galaxy.py --action put --argument phinch_export.biom', $pipeDescriptions, $pipes, NULL);
 $return_value = proc_close($process);
 
 
