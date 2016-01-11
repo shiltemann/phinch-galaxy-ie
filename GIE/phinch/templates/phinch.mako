@@ -13,10 +13,7 @@ user_file = ie_request.volume(hda.file_name, '/home/Phinch/data/'+os.path.basena
 
 # Launch the IE. This builds and runs the docker command in the background.
 ie_request.launch(
-    volumes=[user_file],
-    env_override={
-        'custom': '42'
-    }
+    volumes=[user_file]
 )
 
 # Only once the container is launched can we template our URLs. The ie_request
