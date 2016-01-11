@@ -5,7 +5,7 @@ Galaxy Interactive Environment for the [Phinch](http://phinch.org) visualisation
 ## How to run this on a local Galaxy
 
 Below is a description of how to test this on a localhost Galaxy instance. For more advanced configurations, please
-see the excellent documentation by the Galaxy Team [here]().
+see the excellent documentation by the Galaxy Team [here](https://docs.galaxyproject.org/en/master/admin/interactive_environments.html).
 
 
 #### Install Galaxy
