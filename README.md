@@ -14,7 +14,7 @@ see the excellent documentation by the Galaxy Team [here](https://docs.galaxypro
 $ git clone https://github.com/galaxyproject/galaxy/
 ```
 
-edit the galaxi.ini file
+edit the galaxi.ini file:
 
 ```
 [..]
@@ -80,7 +80,7 @@ $ sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 #### Install the Interactive Environment
 
-Clone this repo
+Clone this repo (anywhere):
 
 ```bash
 $ git clone https://github.com/shiltemann/phinch-galaxy-ie.git
@@ -90,19 +90,23 @@ Copy the folder `phinch` (subfolder of `GIE`) to the `config/plugins/interactive
 
 #### Run
 
-Start Galaxy
+Start Galaxy:
 
 ```bash
+$ cd <GALAXY ROOT DIR>
 $ sh run.sh
 ```
 
 - Open your Chrome web browser  
 - Navigate to localhost:8080  
 - Make sure you are logged in  
-- Upload a biom file (example provided in this repo)  
+- Upload a .biom file (an example file is provided in this repo)  
 - Click on the visualisation button for the biom dataset and select Phinch  
-- The first time it may take a little while to start as the docker image needs to be downloaded; it shoud be faster on subsequent uses  
+- The first time it will download the docker image from DockerHub, which may take a little while. (you can monitor progress in Galaxy log)  
+- After that it should be pretty quick to load.  
 - Your galaxy dataset should be automatically loaded into Phinch  
-- NOTE: sharing has been disabled as the docker image will be short-lived  
+- NOTE: share button has been disabled as the docker image will be short-lived  
+- NOTE: the docker image will be killed after 10 minutes of inactivity  
+- NOTE: export of filtered biom file or images should result in a new dataset in your history, but a refresh of the history may be required.  
 
 
