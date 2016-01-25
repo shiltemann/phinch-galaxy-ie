@@ -15,6 +15,6 @@ sed -i  "s/'REPLACE_ME'/'${newname}'/g"  /home/Phinch/scripts/readFile.js
 # Launch traffic monitor which will automatically kill the container if traffic
 # stops
 /monitor_traffic.sh &
-tcpdump -l -tttt > tcp.log &
+
 # And nginx in foreground mode.
 nginx -g 'daemon off;'

@@ -1,18 +1,14 @@
 #!/bin/bash
 
-# Check time of last http request in output from tcpdump. If it was recieved more than 
-# 10 minutes ago, stop the container
+# Take the netstat output the estimate if the client is still connected to
+# the Phinch server. The 'CLOSE_WAIT' state will be ignored. 
 
-timeout=600
 while true; do
     sleep 60
-  
-    lastrequesttime=`cat tcp.log | grep http | tail -1 | cut -f1 -d"."`
-    lastrequesttime=`date -d "$lastrequesttime" +%s`
-    now=`date +%s`
 
-    if [[ $now -gt $(($lastrequesttime+$timeout)) ]]   
+    if [ `netstat -t | grep -v CLOSE_WAIT | grep ':8000' | wc -l` -lt 1 ]
     then
         pkill nginx
     fi
+
 done
