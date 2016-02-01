@@ -1,8 +1,26 @@
-# Phinch Galaxy IE (WIP)
+# Phinch Galaxy IE
 
 Galaxy Interactive Environment for the [Phinch](http://phinch.org) visualisation framework.
 
-## How to run this on a local Galaxy
+## How to Run
+
+### Metagenomics Galaxy
+
+This plugin is installed in the [Metagenomics Galaxy Flavour](https://github.com/bgruening/galaxy-metagenomics). 
+
+Assuming docker is installed on your system, this container can be started as follows:
+
+```
+docker run --rm -p 8080:80 -it -p 8800:8800 -v `pwd`/foo/:/export/ --privileged=true quay.io/bgruening/galaxy-metagenomics
+```
+
+NOTE: See the README in the Metagenomics Galaxy repo for more information and advanced configurations.
+
+Once the image is running, access it by navigating to `<hostname>:8080` in your (Chrome) web browser. Make sure you are logged in and upload a biom file. You should now have Phinch as a visualisation option for that dataset.
+
+
+
+### How to run this on a local Galaxy
 
 Below is a description of how to test this on a localhost Galaxy instance. For more advanced configurations, please
 see the excellent documentation by the Galaxy Team [here](https://docs.galaxyproject.org/en/master/admin/interactive_environments.html).
