@@ -46,6 +46,8 @@ RUN sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 100M/' /etc/php5/cl
     sed -i 's/post_max_size = 8M/post_max_size = 100M/' /etc/php5/cli/php.ini
 
     
+RUN mkdir import
+
 ### Start our container
 ADD ./startup.sh /startup.sh
 ADD ./monitor_traffic.sh /monitor_traffic.sh
