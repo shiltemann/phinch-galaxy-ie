@@ -99,16 +99,6 @@ $ sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
 
-#### Install the Interactive Environment
-
-Clone this repo (anywhere):
-
-```bash
-$ git clone https://github.com/shiltemann/phinch-galaxy-ie.git
-```
-
-Copy the folder `phinch` (subfolder of `GIE`) to the `config/plugins/interactive_environments/` folder
-
 #### Run
 
 Start Galaxy:
@@ -119,7 +109,7 @@ $ sh run.sh
 ```
 
 - Open your Chrome web browser  
-- Navigate to localhost:8080  
+- Navigate to <hostname>:8080  
 - Make sure you are logged in  
 - Upload a .biom file (an example file is provided in this repo)  
 - Click on the visualisation button for the biom dataset and select Phinch  
