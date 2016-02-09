@@ -1,6 +1,9 @@
+NOTE: GIE folder is now deprecated as this has been merged into Galaxy. The Docker image is still being maintained here.
+
 # Phinch Galaxy IE
 
 Galaxy Interactive Environment for the [Phinch](http://phinch.org) visualisation framework.
+
 
 ## How to Run
 
